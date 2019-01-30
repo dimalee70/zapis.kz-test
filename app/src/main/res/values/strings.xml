@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">helloworld</string>
+    <string name="text_favorites">Favorites</string>
+    <string name="text_schedules">Schedules</string>
+    <string name="text_music">Music</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+</resources>
