@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.dmitriyl.helloworld.fragments.HomeFragment">
 
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.dmitriyl.helloworld.fragments.PlayersFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
