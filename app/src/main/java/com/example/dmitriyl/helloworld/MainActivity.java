@@ -13,6 +13,17 @@ import android.widget.TextView;
 import com.example.dmitriyl.helloworld.fragments.HomeFragment;
 import com.example.dmitriyl.helloworld.fragments.ProfileFragment;
 import com.example.dmitriyl.helloworld.fragments.SearchFragment;
+import com.example.dmitriyl.helloworld.interfaces.SaloonService;
+import com.example.dmitriyl.helloworld.models.Saloon;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     String msg = "Android";
@@ -81,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setupViewPager(viewPager);
+
+
+
+
 
     }
 

@@ -50,10 +50,10 @@ public class PlayersFragment extends ListFragment
         String[] from={"Player","Image"};
 
         //IDS OF VIEWS
-        int[] to={R.id.nameTxt,R.id.imageView1};
+        int[] to={R.id.nameTxt,R.id.imageView};
 
         //ADAPTER
-        adapter=new SimpleAdapter(getActivity(), data, R.layout.model, from, to);
+        adapter=new SimpleAdapter(getActivity(), data, R.layout.movie_list_row, from, to);
         setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
