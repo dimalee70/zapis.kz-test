@@ -5,13 +5,23 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.dmitriyl.helloworld.interfaces.SaloonService;
 import com.example.dmitriyl.helloworld.models.SaloonInfoResponce;
+import com.smarteist.autoimageslider.DefaultSliderView;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderLayout;
+import com.smarteist.autoimageslider.SliderView;
 
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,6 +35,8 @@ public class InfoActivity extends AppCompatActivity
 {
 
     private String [] urls;
+    private SliderLayout sliderLayout ;
+
 
     private static ViewPager mPager;
     private static int currentPage = 0;
@@ -46,6 +58,11 @@ public class InfoActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_info);
+        sliderLayout = findViewById(R.id.imageSlider);
+        sliderLayout.setIndicatorAnimation(IndicatorAnimations.SWAP); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
+        sliderLayout.setScrollTimeInSec(5); //set scroll delay in seconds :
+
         final int id = getIntent().getIntExtra("id", -1);
         id1 = (TextView) findViewById(R.id.id1);
         name1 = (TextView) findViewById(R.id.name1);
@@ -71,6 +88,8 @@ public class InfoActivity extends AppCompatActivity
 
                 urls =  saloonInfoResponce.getSaloonInfo().getPictures();
 
+                System.out.println("urls " + Arrays.toString(urls));
+                setSliderViews();
                 id1 = (TextView) findViewById(R.id.id1);
                 name1 = (TextView) findViewById(R.id.name1);
                 type1 = (TextView) findViewById(R.id.type1);
@@ -79,23 +98,34 @@ public class InfoActivity extends AppCompatActivity
                 workStartTime1 = (TextView) findViewById(R.id.workStartTime1);
                 workEndTime1 = (TextView) findViewById(R.id.workEndTime1);
                 description = (TextView) findViewById(R.id.description);
-                System.out.println(saloonInfoResponce.getSaloonInfo().getAddress());
-                name1.setText("dfsdfsd");
+
+                name1.setText(Html.fromHtml(saloonInfoResponce.getSaloonInfo().getName(),
+                        Html.FROM_HTML_MODE_COMPACT));
 //                id1.setText(id);
+
                 name1.setText((saloonInfoResponce.getSaloonInfo().getName()
-                ==null)?"":saloonInfoResponce.getSaloonInfo().getName());
+                ==null)?"": Html.fromHtml(saloonInfoResponce.getSaloonInfo().getName(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 type1.setText((saloonInfoResponce.getSaloonInfo().getType()
-                == null)?"":saloonInfoResponce.getSaloonInfo().getType());
+                == null)?"":Html.fromHtml(saloonInfoResponce.getSaloonInfo().getType(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 address1.setText((saloonInfoResponce.getSaloonInfo().getAddress()
-                ==null)?"":saloonInfoResponce.getSaloonInfo().getAddress());
+                ==null)?"":Html.fromHtml(saloonInfoResponce.getSaloonInfo().getAddress(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 checkRating1.setText((saloonInfoResponce.getSaloonInfo().getCheckRating()
-                ==null)?"": saloonInfoResponce.getSaloonInfo().getCheckRating());
+                ==null)?"": Html.fromHtml(saloonInfoResponce.getSaloonInfo().getCheckRating(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 workStartTime1.setText((saloonInfoResponce.getSaloonInfo().getWorkStartTime()
-                ==null)?"":saloonInfoResponce.getSaloonInfo().getWorkStartTime());
+                ==null)?"":Html.fromHtml(saloonInfoResponce.getSaloonInfo().getWorkStartTime(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 workEndTime1.setText((saloonInfoResponce.getSaloonInfo().getWorkEndTime()
-                ==null)?"":saloonInfoResponce.getSaloonInfo().getWorkEndTime());
+                ==null)?"":Html.fromHtml(saloonInfoResponce.getSaloonInfo().getWorkEndTime(),
+                        Html.FROM_HTML_MODE_COMPACT));
                 description.setText((saloonInfoResponce.getSaloonInfo().getDescription()
-                ==null)?"":saloonInfoResponce.getSaloonInfo().getDescription());
+                ==null)?"":Html.fromHtml(saloonInfoResponce.getSaloonInfo().getDescription(),
+                        Html.FROM_HTML_MODE_COMPACT));
+
+
 
 
 
@@ -107,5 +137,30 @@ public class InfoActivity extends AppCompatActivity
             }
 
         });
+    }
+
+    private void setSliderViews() {
+
+        for (String s : urls) {
+
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+
+            if (s != null) {
+                sliderView.setImageUrl("http://zp.jgroup.kz"+s);
+
+                sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+                sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
+                    @Override
+                    public void onSliderClick(SliderView sliderView) {
+                        Toast.makeText(InfoActivity.this, "This is slider ", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+            //at last add this view in your layout :
+            sliderLayout.addSliderView(sliderView);
+        }
     }
 }

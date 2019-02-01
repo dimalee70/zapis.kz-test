@@ -52,10 +52,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
         public MyViewHolder(View view, Context mContext) {
             super(view);
-            id = (TextView) view.findViewById(R.id.id);
+//            id = (TextView) view.findViewById(R.id.id);
             name = (TextView) view.findViewById(R.id.name);
             type = (TextView) view.findViewById(R.id.type);
-            checkRating = (TextView) view.findViewById(R.id.checkRating);
+//            checkRating = (TextView) view.findViewById(R.id.checkRating);
             imageView = (ImageView) view.findViewById(R.id.imageView);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,10 +86,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Saloon movie = moviesList.get(position);
-        holder.id.setText(movie.getId());
+//        holder.id.setText(movie.getId());
         holder.name.setText(movie.getName());
         holder.type.setText(movie.getType());
-        holder.checkRating.setText(movie.getCheckRating());
+//        holder.checkRating.setText(movie.getCheckRating());
         if(movie.getPictureUrl() !=null && ! movie.getPictureUrl().isEmpty()){
             Picasso.with(holder.imageView.getContext())
                     .load("http://zp.jgroup.kz" + movie.getPictureUrl())

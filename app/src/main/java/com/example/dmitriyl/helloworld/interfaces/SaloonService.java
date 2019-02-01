@@ -17,4 +17,8 @@ public interface SaloonService
 
     @GET("/rest/v1/salon/page")
     Call<SaloonInfoResponce> getSaloon(@Query("id") Integer id);
+
+    @GET("/rest/v1/salon/getRecommended")
+    Call<SaloonsResponce> saloonListRecommended();
+
 }
